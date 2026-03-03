@@ -1,0 +1,93 @@
+# =============================================================================
+# EU-ETS Algorithmic Trading — Default Configuration
+# =============================================================================
+# Override any section by creating configs/local.yaml (gitignored)
+# Environment variables take precedence over this file.
+# =============================================================================
+
+# ── Universe ──────────────────────────────────────────────────────────────────
+universe:
+  eua_ticker:    "CO2.L"      # EUA front-month future (ICE via Yahoo)
+  gas_ticker:    "TTF=F"      # TTF Natural Gas future
+  coal_ticker:   "MTF=F"      # ARA Coal future
+  brent_ticker:  "BZ=F"       # Brent Crude
+  eurostoxx:     "^STOXX50E"  # EU equity index (industrial activity)
+  eur_usd:       "EURUSD=X"   # FX rate
+  vix:           "^VIX"       # Risk sentiment
+
+# ── Data ──────────────────────────────────────────────────────────────────────
+data:
+  default_start:   "2015-01-01"   # Default backtest start (Phase 3 of EU-ETS)
+  default_interval: "1d"          # Daily bars
+  cache_enabled:   true
+  cache_ttl_hours: 24             # Refresh cache after 24h
+
+# ── Execution ─────────────────────────────────────────────────────────────────
+execution:
+  initial_capital:   100_000     # EUR
+  commission:        0.001       # 0.10% per side
+  slippage:          0.0005      # 0.05% slippage model
+  # Execution assumption: signal on CLOSE → fill at next OPEN
+  fill_price:        "next_open"
+
+# ── Risk Management ───────────────────────────────────────────────────────────
+risk:
+  max_position_pct:  0.20    # Max 20% of NAV per position
+  max_drawdown_pct:  0.15    # Circuit breaker: halt at 15% drawdown
+  var_confidence:    0.95    # 95% VaR confidence level
+  var_window_days:   252     # 1-year rolling VaR window
+  volatility_target: 0.15    # 15% annualized vol target (for vol-targeting sizer)
+  max_leverage:      1.0     # No leverage by default
+
+# ── Strategy Parameters ───────────────────────────────────────────────────────
+strategies:
+
+  momentum:
+    ema_fast:         20       # Fast EMA period (days)
+    ema_slow:         50       # Slow EMA period (days)
+    rsi_period:       14       # RSI period
+    rsi_min:          45       # Minimum RSI to go long (filter weak signals)
+    volume_ma:        20       # Volume MA period for volume filter
+    atr_period:       14       # ATR period for stop-loss
+    atr_stop_mult:    2.0      # Stop = entry - 2×ATR
+    atr_target_mult:  4.0      # Target = entry + 4×ATR (2:1 R/R minimum)
+
+  mean_reversion:
+    bb_period:        20       # Bollinger Band period
+    bb_std:           2.0      # Bollinger Band standard deviations
+    zscore_entry:     2.0      # Z-score threshold to enter
+    zscore_exit:      0.5      # Z-score threshold to exit
+    lookback:         60       # Lookback window for Z-score calculation
+    apply_seasonal_filter: true # Only short in May-June window
+
+  spread:
+    spread_zscore_entry:  1.5  # Z-score to trade the spread
+    spread_zscore_exit:   0.3  # Exit when spread normalizes
+    spread_lookback:      90   # Rolling window for spread stats (days)
+    min_correlation:      0.5  # Minimum correlation to trade spread
+
+  seasonal:
+    min_bias_threshold:  0.3   # Min seasonal bias score to trade
+    vol_scale:          true   # Scale position by inverse volatility
+    confirm_trend:      true   # Require EMA trend confirmation
+
+# ── Backtesting ───────────────────────────────────────────────────────────────
+backtest:
+  start_date:   "2018-01-01"
+  end_date:     "2024-01-01"
+  # Walk-forward: split data into in-sample (train) / out-of-sample (test)
+  wf_train_pct: 0.70           # 70% in-sample, 30% out-of-sample
+  wf_n_windows: 5              # Number of walk-forward windows
+  report_output: "backtest_report.html"
+
+# ── Paper Trading ─────────────────────────────────────────────────────────────
+paper_trading:
+  update_interval_sec: 60      # Poll Yahoo Finance every 60 seconds
+  log_file: "data/paper_trades.csv"
+  alert_email: null            # Set to send email alerts on trades
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  level:  "INFO"               # DEBUG | INFO | WARNING | ERROR
+  file:   "logs/trading.log"
+  rotate: "10 MB"

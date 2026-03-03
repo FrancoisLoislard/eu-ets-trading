@@ -1,0 +1,47 @@
+# ============================================================
+# EU-ETS Algorithmic Trading — Dependencies
+# ============================================================
+
+# --- Data ---
+yfinance>=0.2.36          # Yahoo Finance market data
+pandas>=2.1.0             # Data manipulation
+numpy>=1.26.0             # Numerical computing
+requests>=2.31.0          # HTTP client
+pyyaml>=6.0.1             # YAML config files
+python-dotenv>=1.0.0      # .env file loading
+
+# --- Technical Analysis ---
+ta>=0.11.0                # Technical indicators library
+pandas-ta>=0.3.14b        # Extended technical analysis
+
+# --- Backtesting ---
+vectorbt>=0.26.1          # Vectorized backtesting
+
+# --- Statistics ---
+scipy>=1.11.0             # Statistical functions
+statsmodels>=0.14.0       # Time series analysis (ADF, cointegration)
+
+# --- Optimization ---
+optuna>=3.4.0             # Hyperparameter optimization
+
+# --- Visualization ---
+plotly>=5.18.0            # Interactive charts
+matplotlib>=3.8.0         # Static plots
+seaborn>=0.13.0           # Statistical plots
+
+# --- Dashboard ---
+streamlit>=1.29.0         # Web dashboard
+
+# --- Scheduling ---
+schedule>=1.2.0           # Job scheduling for live trading
+
+# --- Logging ---
+loguru>=0.7.2             # Enhanced logging
+
+# --- Testing ---
+pytest>=7.4.0             # Test framework
+pytest-cov>=4.1.0         # Coverage reporting
+
+# --- CLI ---
+click>=8.1.7              # Command-line interface
+rich>=13.7.0              # Beautiful terminal output
