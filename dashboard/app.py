@@ -219,8 +219,8 @@ with t2:
         fig.add_hrect(y0=70,y1=100,fillcolor=R,opacity=.04,row=r,col=1)
         fig.add_hrect(y0=0,y1=30,fillcolor=G,opacity=.04,row=r,col=1)
         fig.update_yaxes(title_text="RSI",range=[0,100],row=r,col=1)
-    fig.update_layout(**PL,height=620,xaxis_rangeslider_visible=False,
-        legend=dict(orientation="h",yanchor="bottom",y=1.01,xanchor="right",x=1,
+        fig.update_layout(**PL,height=620,xaxis_rangeslider_visible=False)
+        fig.update_layout(legend=dict(orientation="h",yanchor="bottom",y=1.01,xanchor="right",x=1,
             bgcolor="rgba(22,27,34,.85)",font=dict(size=11)))
     st.plotly_chart(fig,use_container_width=True)
     ss1,ss2,ss3=st.columns(3)
@@ -353,17 +353,3 @@ with t4:
                     title=dict(text=f"EUA vs {asset}  r={cv:.2f}",font=dict(size=12,color=GR)))
                 st.plotly_chart(fsc,use_container_width=True)
     st.markdown('<div class="wbox">⚠️ <b>Disclaimer:</b> Educational purposes only. Not investment advice.</div>',unsafe_allow_html=True)
-```
-
----
-
-## 🚀 Puis relancez Streamlit
-```
-streamlit run dashboard/app.py
-```
-
-## 📤 Et envoyez sur GitHub
-```
-git add dashboard/app.py
-git commit -m "Redesign dashboard: 4 tabs, dark theme, English"
-git push
