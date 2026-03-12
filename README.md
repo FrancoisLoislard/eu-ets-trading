@@ -1,5 +1,9 @@
 # 🌍 EU-ETS Algorithmic Trading System
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://eu-ets-trading.streamlit.app/)
+
+> 🚀 **Live Dashboard** → [https://eu-ets-trading.streamlit.app/](https://eu-ets-trading.streamlit.app/)
+
 > **A professional-grade algorithmic trading framework for European Carbon Allowances (EUA)**  
 > Built with Python · Backtesting · Live/Paper Trading · Risk Management
 
