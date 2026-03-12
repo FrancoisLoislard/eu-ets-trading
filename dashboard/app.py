@@ -262,8 +262,16 @@ with t3:
             textfont=dict(size=11,family="IBM Plex Mono")))
         fs.add_vline(x=nm-1,line_color=Y,line_width=2.5,
             annotation_text=f"← {MO[nm-1]}",annotation_font=dict(color=Y,size=11))
-        fs.update_layout(**PL,height=320,showlegend=False,
-            yaxis=dict(title="Bias score",range=[-.8,1.2],gridcolor="#21262D"))
+        fs.update_layout(
+            plot_bgcolor="#0D1117", paper_bgcolor="#161B22",
+            font=dict(family="IBM Plex Sans", color="#C9D1D9", size=12),
+            xaxis=dict(gridcolor="#21262D", linecolor="#30363D"),
+            yaxis=dict(gridcolor="#21262D", linecolor="#30363D",
+                       title="Bias score", range=[-0.8, 1.2]),
+            legend=dict(bgcolor="#161B22", bordercolor="#21262D", borderwidth=1),
+            margin=dict(l=50, r=30, t=40, b=40),
+            height=320, showlegend=False,
+        )
         st.plotly_chart(fs,use_container_width=True)
     with cs2:
         st.markdown('<div class="sec">Month-by-Month Calendar</div>',unsafe_allow_html=True)
