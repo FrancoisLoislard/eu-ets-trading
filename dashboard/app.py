@@ -352,7 +352,16 @@ with t4:
             frc.add_hline(y=0,line_color=GR,line_dash="dot",opacity=.5)
             frc.add_hrect(y0=.5,y1=1,fillcolor=G,opacity=.04)
             frc.add_hrect(y0=-1,y1=-.5,fillcolor=R,opacity=.04)
-            frc.update_layout(**PL,height=280,yaxis=dict(range=[-1,1],title="Correlation"),legend=dict(orientation="h",y=1.1))
+            frc.update_layout(
+                plot_bgcolor="#0D1117", paper_bgcolor="#161B22",
+                font=dict(family="IBM Plex Sans", color="#C9D1D9", size=12),
+                xaxis=dict(gridcolor="#21262D", linecolor="#30363D"),
+                yaxis=dict(gridcolor="#21262D", linecolor="#30363D",
+                           range=[-1, 1], title="Correlation"),
+                height=280, margin=dict(l=50, r=30, t=40, b=40),
+                legend=dict(bgcolor="#161B22", bordercolor="#21262D",
+                            borderwidth=1, orientation="h", y=1.1),
+            )
             st.plotly_chart(frc,use_container_width=True)
     others=[c for c in rdf.columns if c!="EUA (CO2.L)"]
     if others and "EUA (CO2.L)" in rdf.columns:
