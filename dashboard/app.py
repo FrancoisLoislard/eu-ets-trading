@@ -55,12 +55,25 @@ section[data-testid="stSidebar"] label,section[data-testid="stSidebar"] p{color:
 
 G="#3FB950"; R="#F85149"; B="#58A6FF"; Y="#D29922"; P="#BC8CFF"; GR="#8B949E"
 PAL=[G,Y,B,P]
-PL=dict(plot_bgcolor="#0D1117",paper_bgcolor="#161B22",
-        font=dict(family="IBM Plex Sans",color="#C9D1D9",size=12),
-        xaxis=dict(gridcolor="#21262D",linecolor="#30363D"),
-        yaxis=dict(gridcolor="#21262D",linecolor="#30363D"),
-        legend=dict(bgcolor="#161B22",bordercolor="#21262D",borderwidth=1),
-        margin=dict(l=50,r=30,t=40,b=40))
+PL=dict(
+    plot_bgcolor="#0D1117", paper_bgcolor="#161B22",
+    font=dict(family="IBM Plex Sans", color="#C9D1D9", size=12),
+    xaxis=dict(
+        gridcolor="#2D3748", linecolor="#4A5568",
+        tickcolor="#C9D1D9", tickfont=dict(color="#C9D1D9", size=11),
+        title_font=dict(color="#C9D1D9"),
+    ),
+    yaxis=dict(
+        gridcolor="#2D3748", linecolor="#4A5568",
+        tickcolor="#C9D1D9", tickfont=dict(color="#C9D1D9", size=11),
+        title_font=dict(color="#C9D1D9"),
+    ),
+    legend=dict(
+        bgcolor="#161B22", bordercolor="#21262D", borderwidth=1,
+        font=dict(color="#C9D1D9", size=11),
+    ),
+    margin=dict(l=50, r=30, t=40, b=40),
+)
 
 @st.cache_data(ttl=3600)
 def load(ticker, period="2y"):
