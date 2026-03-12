@@ -329,7 +329,15 @@ with t4:
         if len(rdf.columns)>1:
             fcm=px.imshow(rdf.corr(),color_continuous_scale=[[0,R],[.5,"#21262D"],[1,G]],
                 zmin=-1,zmax=1,text_auto=".2f",aspect="auto")
-            fcm.update_layout(**PL,height=280,margin=dict(l=10,r=10,t=10,b=10),coloraxis_showscale=False)
+            fcm.update_layout(
+                plot_bgcolor="#0D1117", paper_bgcolor="#161B22",
+                font=dict(family="IBM Plex Sans", color="#C9D1D9", size=12),
+                xaxis=dict(gridcolor="#21262D", linecolor="#30363D"),
+                yaxis=dict(gridcolor="#21262D", linecolor="#30363D"),
+                legend=dict(bgcolor="#161B22", bordercolor="#21262D", borderwidth=1),
+                height=280, margin=dict(l=10, r=10, t=10, b=10),
+                coloraxis_showscale=False,
+            )
             fcm.update_traces(textfont=dict(size=12,family="IBM Plex Mono"))
             st.plotly_chart(fcm,use_container_width=True)
         st.markdown('<div class="ibox" style="font-size:.8rem"><b>+1.0</b> move together · <b>0</b> no link · <b>−1.0</b> opposite</div>',unsafe_allow_html=True)
@@ -357,7 +365,14 @@ with t4:
                 fsc=px.scatter(sub,x=asset,y="EUA (CO2.L)",trendline="ols",
                     labels={"EUA (CO2.L)":"EUA (%)"},color_discrete_sequence=[B])
                 fsc.update_traces(marker=dict(size=4,opacity=.5))
-                fsc.update_layout(**PL,height=260,margin=dict(l=30,r=10,t=40,b=30),
-                    title=dict(text=f"EUA vs {asset}  r={cv:.2f}",font=dict(size=12,color=GR)))
+                fsc.update_layout(
+                    plot_bgcolor="#0D1117", paper_bgcolor="#161B22",
+                    font=dict(family="IBM Plex Sans", color="#C9D1D9", size=12),
+                    xaxis=dict(gridcolor="#21262D", linecolor="#30363D"),
+                    yaxis=dict(gridcolor="#21262D", linecolor="#30363D"),
+                    legend=dict(bgcolor="#161B22", bordercolor="#21262D", borderwidth=1),
+                    height=260, margin=dict(l=30, r=10, t=40, b=30),
+                    title=dict(text=f"EUA vs {asset}  r={cv:.2f}", font=dict(size=12, color=GR)),
+                )
                 st.plotly_chart(fsc,use_container_width=True)
     st.markdown('<div class="wbox">⚠️ <b>Disclaimer:</b> Educational purposes only. Not investment advice.</div>',unsafe_allow_html=True)
